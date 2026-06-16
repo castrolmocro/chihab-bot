@@ -290,7 +290,7 @@ module.exports = {
     version: "4.0",
     author: "Stefan",
     countDown: 5,
-    role: 0,
+    role: 2,
     category: "info",
     description: "وقت تشغيل البوت مع إحصائيات OneUI 8.5",
     guide: { en: "{pn} — عرض الإحصائيات" }
