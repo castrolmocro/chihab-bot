@@ -164,7 +164,15 @@ function startDashboard(port = 5000) {
 
   app.use(bodyParser.json({ limit: "5mb" }));
   app.use(bodyParser.urlencoded({ extended: true, limit: "5mb" }));
-  app.use(express.static(path.join(__dirname, "public")));
+  app.use(express.static(path.join(__dirname, "public"), {
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith(".html")) {
+        res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.setHeader("Pragma", "no-cache");
+        res.setHeader("Expires", "0");
+      }
+    }
+  }));
 
   // ── Health check (Railway / Render / Heroku) ─────────────────────────────────
   app.get("/health", (_, res) => res.json({ ok: true, status: "running", ts: Date.now() }));
